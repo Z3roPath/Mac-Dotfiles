@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Catppuccin Macchiato Palette
+export BLACK=0xff1e2030
+export WHITE=0xffcad3f5
+export RED=0xffed8796
+export GREEN=0xffa6da95
+export BLUE=0xff8aadf4
+export YELLOW=0xffeed49f
+export ORANGE=0xfff5a97f
+export MAGENTA=0xffc6a0f6
+export CYAN=0xff91d7e3
+export GREY=0xff939ab7
+export TRANSPARENT=0x00000000
+
+# Bar Colors
+export BAR_COLOR=0xcc1e2030
+export ICON_COLOR=$WHITE
+export LABEL_COLOR=$WHITE
+export ACCENT_COLOR=$BLUE
+export ITEM_BG_COLOR=0xff36394e
+export POPUP_BACKGROUND_COLOR=0xff1e2030
+export POPUP_BORDER_COLOR=$BLUE
+
+# Map old variables to new ones for compatibility
+export COMMENT=$GREY
+export CYAN_COLOR=$CYAN
+
+ITEM_DIR="$HOME/.config/sketchybar/items"
+PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
+FONT="JetBrainsMono Nerd Font"
+PADDINGS=3
+CORNER_RADIUS=8
+BORDER_WIDTH=1
+SHADOW=on

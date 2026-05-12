@@ -1,0 +1,148 @@
+# skhd Configuration
+
+# --- Application Shortcuts ---
+# Open Ghostty terminal (Cmd + Return)
+cmd - return : /usr/bin/open -n -a Ghostty
+
+# Open Google Chrome (Cmd + B) - Always opens a new window
+cmd - b : /usr/bin/osascript -e 'if application "Google Chrome" is running then' -e 'tell application "Google Chrome" to make new window' -e 'end if' -e 'activate application "Google Chrome"'
+
+# Open Finder (Cmd + F)
+cmd - f : /usr/bin/open -a Finder
+
+# Open YouTube Music (Cmd + M)
+cmd - m : /usr/bin/open -a "/Users/user/Applications/Chrome Apps.localized/YouTube Music.app"
+
+# --- General System Bindings ---
+# Super + Escape : Open native Apple Menu
+cmd - escape : /usr/bin/osascript -e 'tell application "System Events" to click menu bar item 1 of menu bar 1 of (first process whose frontmost is true)'
+
+# Super + Ctrl + L : Lock computer
+cmd + ctrl - l : /System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend
+
+# Super + Q : Full Quit Application
+cmd - q : /usr/bin/osascript -e 'tell application "System Events" to set frontApp to name of first process whose frontmost is true' -e 'tell application frontApp to quit'
+
+# Super + W : Close focused window
+cmd - w : /opt/homebrew/bin/yabai -m window --close
+
+# Ctrl + Alt + Del : Close all windows on current space
+ctrl + alt - backspace : /opt/homebrew/bin/yabai -m query --windows --space | /opt/homebrew/bin/jq '.[].id' | /usr/bin/xargs -I{} /opt/homebrew/bin/yabai -m window {} --close
+
+# --- Window Management ---
+# Super + T : Toggle window tiling/floating and center (85% width, 80% height)
+cmd - t : /opt/homebrew/bin/yabai -m window --toggle float --grid 40:40:3:4:34:32
+
+# Super + P : Toggle floating and center (85% width, 80% height)
+cmd - p : /opt/homebrew/bin/yabai -m window --toggle float --grid 40:40:3:4:34:32
+
+# Super + O : Toggle sticky and floating
+cmd - o : /opt/homebrew/bin/yabai -m window --toggle sticky; /opt/homebrew/bin/yabai -m window --toggle float
+
+# Super + L : Toggle between bsp and stack layout
+cmd - l : /opt/homebrew/bin/yabai -m space --layout $(/opt/homebrew/bin/yabai -m query --spaces --space | /opt/homebrew/bin/jq -r 'if .type == "bsp" then "stack" else "bsp" end')
+
+# Super + P : Toggle floating
+cmd - p : /opt/homebrew/bin/yabai -m window --toggle float
+
+# Super + Shift + F : Fullscreen
+cmd + shift - f : /opt/homebrew/bin/yabai -m window --toggle zoom-fullscreen
+
+# Super + Alt + F : Zoom-parent
+cmd + alt - f : /opt/homebrew/bin/yabai -m window --toggle zoom-parent
+
+# Super + Slash : Toggle transparency (alpha)
+cmd - 0x2C : /opt/homebrew/bin/yabai -m window --opacity $(/opt/homebrew/bin/yabai -m query --windows --window | /opt/homebrew/bin/jq -r 'if .opacity == 0.8 then "1.0" else "0.8" end')
+
+# Super + Ctrl + F : Native fullscreen
+cmd + ctrl - f : /opt/homebrew/bin/yabai -m window --toggle native-fullscreen
+
+# --- Navigation & Movement ---
+# Super + Arrow : Move focus
+cmd - left  : /opt/homebrew/bin/yabai -m window --focus west
+cmd - down  : /opt/homebrew/bin/yabai -m window --focus south
+cmd - up    : /opt/homebrew/bin/yabai -m window --focus north
+cmd - right : /opt/homebrew/bin/yabai -m window --focus east
+
+# Super + Shift + Arrow : Swap window
+cmd + shift - left  : /opt/homebrew/bin/yabai -m window --swap west
+cmd + shift - down  : /opt/homebrew/bin/yabai -m window --swap south
+cmd + shift - up    : /opt/homebrew/bin/yabai -m window --swap north
+cmd + shift - right : /opt/homebrew/bin/yabai -m window --swap east
+
+# --- Resizing ---
+# Super + Equal/Minus : Grow windows
+cmd - 0x18 : /opt/homebrew/bin/yabai -m window --resize left:-20:0; /opt/homebrew/bin/yabai -m window --resize right:20:0
+cmd - 0x1B : /opt/homebrew/bin/yabai -m window --resize left:20:0; /opt/homebrew/bin/yabai -m window --resize right:-20:0
+cmd + shift - 0x18 : /opt/homebrew/bin/yabai -m window --resize top:0:-20; /opt/homebrew/bin/yabai -m window --resize bottom:0:20
+cmd + shift - 0x1B : /opt/homebrew/bin/yabai -m window --resize top:0:20; /opt/homebrew/bin/yabai -m window --resize bottom:0:-20
+
+# --- Workspace Management ---
+# Super + 1/2/3/4 : Jump to specific workspace
+cmd - 1 : /opt/homebrew/bin/yabai -m space --focus 1
+cmd - 2 : /opt/homebrew/bin/yabai -m space --focus 2
+cmd - 3 : /opt/homebrew/bin/yabai -m space --focus 3
+cmd - 4 : /opt/homebrew/bin/yabai -m space --focus 4
+
+# Super + Ctrl + Tab : Former workspace
+cmd + ctrl - tab : /opt/homebrew/bin/yabai -m space --focus recent
+
+# Super + Shift + 1/2/3/4 : Move window to workspace
+cmd + shift - 1 : /opt/homebrew/bin/yabai -m window --space 1
+cmd + shift - 2 : /opt/homebrew/bin/yabai -m window --space 2
+cmd + shift - 3 : /opt/homebrew/bin/yabai -m window --space 3
+cmd + shift - 4 : /opt/homebrew/bin/yabai -m window --space 4
+
+# Super + Shift + Alt + 1/2/3/4 : Move window to workspace without following
+cmd + shift + alt - 1 : /opt/homebrew/bin/yabai -m window --space 1 --focus 0
+cmd + shift + alt - 2 : /opt/homebrew/bin/yabai -m window --space 2 --focus 0
+cmd + shift + alt - 3 : /opt/homebrew/bin/yabai -m window --space 3 --focus 0
+cmd + shift + alt - 4 : /opt/homebrew/bin/yabai -m window --space 4 --focus 0
+
+# Super + Shift + Alt + Arrows : Move workspaces to directional monitor
+cmd + shift + alt - left  : /opt/homebrew/bin/yabai -m space --display prev
+cmd + shift + alt - right : /opt/homebrew/bin/yabai -m space --display next
+
+# --- Grouping (Stacking) ---
+# Super + G : Toggle window grouping (stacking)
+cmd - g : /opt/homebrew/bin/yabai -m window --toggle stack
+
+# Super + Alt + Tab : Cycle between windows in grouping
+cmd + alt - tab : /opt/homebrew/bin/yabai -m window --focus stack.next
+
+# Super + Alt + 1/2/3/4 : Jump to specific window in grouping
+cmd + alt - 1 : /opt/homebrew/bin/yabai -m window --focus stack.1
+cmd + alt - 2 : /opt/homebrew/bin/yabai -m window --focus stack.2
+cmd + alt - 3 : /opt/homebrew/bin/yabai -m window --focus stack.3
+cmd + alt - 4 : /opt/homebrew/bin/yabai -m window --focus stack.4
+
+# Super + Alt + Arrow : Move window into grouping in direction
+cmd + alt - left  : /opt/homebrew/bin/yabai -m window --stack west
+cmd + alt - down  : /opt/homebrew/bin/yabai -m window --stack south
+cmd + alt - up    : /opt/homebrew/bin/yabai -m window --stack north
+cmd + alt - right : /opt/homebrew/bin/yabai -m window --stack east
+# --- Extra Navigation ---
+# Alt + Tab : Cycle forward through windows on active workspace
+alt - tab : /opt/homebrew/bin/yabai -m window --focus next
+
+# Alt + Shift + Tab : Cycle backward through windows
+alt + shift - tab : /opt/homebrew/bin/yabai -m window --focus prev
+
+# --- Media Keys (Fix for Multi-Output Device) ---
+# Volume Up
+0x6F : /usr/bin/osascript -e 'set volume output volume ((output volume of (get volume settings)) + 5)'
+# Volume Down
+0x6B : /usr/bin/osascript -e 'set volume output volume ((output volume of (get volume settings)) - 5)'
+# Mute
+0x67 : /usr/bin/osascript -e 'set volume output muted (not (output muted of (get volume settings)))'
+
+# --- System ---
+# Ctrl + Alt + Tab : Cycle focus forward through monitors
+ctrl + alt - tab : /opt/homebrew/bin/yabai -m display --focus next
+
+# Ctrl + Alt + Shift + Tab : Cycle focus backwards through monitors
+ctrl + alt + shift - tab : /opt/homebrew/bin/yabai -m display --focus prev
+
+# --- System ---
+# Reload skhd config
+alt + shift - r : /opt/homebrew/bin/skhd --reload-config; /bin/launchctl kickstart -k gui/501/com.koekeishiya.skhd

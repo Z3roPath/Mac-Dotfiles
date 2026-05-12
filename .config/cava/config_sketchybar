@@ -1,0 +1,12 @@
+[general]
+bars = 10
+
+[input]
+method = portaudio
+source = "BlackHole 2ch"
+
+[output]
+method = raw
+raw_target = /tmp/cava_fifo
+data_format = ascii
+ascii_max_range = 7
