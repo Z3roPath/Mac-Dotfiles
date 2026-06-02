@@ -32,18 +32,18 @@ brew install yabai skhd sketchybar borders cava blueutil jq blackhole-2ch
 ### 4. Apply Dotfiles
 Clone this repo and symlink the files:
 ```bash
-git clone https://github.com/YOUR_USERNAME/dotfiles.git ~/dotfiles
-cd ~/dotfiles
+git clone https://github.com/Z3roPath/Mac-Dotfiles.git ~/Mac-Dotfiles
+cd ~/Mac-Dotfiles
 
 # Symlink configs
-ln -sf ~/dotfiles/yabairc ~/.yabairc
-ln -sf ~/dotfiles/skhdrc ~/.skhdrc
-ln -sf ~/dotfiles/zshrc ~/.zshrc
-ln -sf ~/dotfiles/zprofile ~/.zprofile
+ln -sf ~/Mac-Dotfiles/yabairc ~/.yabairc
+ln -sf ~/Mac-Dotfiles/skhdrc ~/.skhdrc
+ln -sf ~/Mac-Dotfiles/zshrc ~/.zshrc
+ln -sf ~/Mac-Dotfiles/zprofile ~/.zprofile
 mkdir -p ~/.config
-ln -sf ~/dotfiles/.config/sketchybar ~/.config/
-ln -sf ~/dotfiles/.config/borders ~/.config/
-ln -sf ~/dotfiles/.config/cava ~/.config/
+ln -sf ~/Mac-Dotfiles/.config/sketchybar ~/.config/
+ln -sf ~/Mac-Dotfiles/.config/borders ~/.config/
+ln -sf ~/Mac-Dotfiles/.config/cava ~/.config/
 ```
 
 ### 5. Start Services
